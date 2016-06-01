@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Metiers\UserServices;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Validator;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 
 class AuthController extends Controller
 {
+    protected $userServices;
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -35,9 +39,10 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserServices $mobileService)
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->userServices = $mobileService;
     }
 
     /**
@@ -72,12 +77,39 @@ class AuthController extends Controller
 
     function signin(Request $request)
     {
+        $credentials = $request->only('email', 'password');
+        //return $credentials;
+        $user = User::whereEmail($request->input('email'))->get()->first();
+        if ($user == null) {
+            return response()->json(['response' => 'invalid_user'], 500);
+        } else {
+            if ($user->valide == 0) {
+                return response()->json(['response' => 'inactive_account'], 402);
+            } else {
+                try {
+                    // verify the credentials and create a token for the user
+                    if (!$token = JWTAuth::attempt($credentials)) {
+                        return response()->json(['response' => 'invalid_credentials'], 401);
+                    }
+                } catch (JWTException $e) {
+                    // something went wrong
+                    return response()->json(['response' => 'could_not_create_token'], 500);
+                }
 
+                // if no errors are encountered we can return a JWT
+                return response()->json(compact('token', 'user'), 200);
+            }
+        }
     }
 
     function signup(Request $request)
     {
+        return $this->userServices->store($request);
+    }
 
+    function validateEmail($id_user, $validation_code)
+    {
+        return $this->userServices->validate($id_user, $validation_code);
     }
 
     function signout(Request $request)
