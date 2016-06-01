@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCurseTable extends Migration
+class CreateCourseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateCurseTable extends Migration
      */
     public function up()
     {
-        Schema::create('curses', function (Blueprint $t) {
+        Schema::create('courses', function (Blueprint $t) {
             $t->increments('id_curse');
             $t->string('label');
             $t->integer('id_category')->unsigned();

@@ -16,10 +16,10 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'mobile'], function () {
-    Route::post('/signin', 'AuthController@signin');
-    Route::post('/signup', 'AuthController@signup');
-    Route::post('/signout', 'Authcontroller@signout');
-    route::get('/validate/{id_user}/{validation_code}', 'AuthController@validateEmail');
+    Route::post('/signin', 'Auth\AuthModileController@signin');
+    Route::post('/signup', 'Auth\AuthModileController@signup');
+    Route::post('/signout', 'Auth\AuthModilecontroller@signout');
+    route::get('/validate/{id_user}/{validation_code}', 'Auth\AuthModileController@validateEmail');
 
     Route::group(['prefix' => 'courses'], function () {
         // return list of courses'titles
@@ -47,5 +47,5 @@ Route::group(['prefix' => 'mobile'], function () {
 
 // user group
 Route::group(['preix' => 'user'], function () {
-    
+
 });
