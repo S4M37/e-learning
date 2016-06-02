@@ -9,7 +9,7 @@ class Result extends Model
     protected $table = 'results';
     protected $primaryKey = 'id_result';
     protected $fillable = [
-        'label', 'score', 'observation'
+        'label', 'score', 'observation','test_date','id_user'
     ];
 
     public $timestamps=false;

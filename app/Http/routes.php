@@ -28,24 +28,30 @@ Route::group(['prefix' => 'mobile'], function () {
         Route::get('/{id}', 'CoursesController@getCourses')->where('id', '[0-9]+');
     });
 
-    Route::group(['prefix' => 'category'], function () {
+    Route::group(['prefix' => 'categories'], function () {
         // return list of categories'names
-        Route::get('/', 'CategoryController@getCategory');
+        Route::get('/', 'CategoryController@getCategories');
         // return specfic category
-        Route::get('/{id}', 'CategoryController@getCategory')->where('id', '[0-9]+');
+        Route::get('/{id}', 'CategoryController@getCategories')->where('id', '[0-9]+');
 
         // QCM group
-        Route::group(['prefix' => '/{id_category}/qcm'], function () {
+        Route::group(['prefix' => '/{id_category}/training'], function () {
             // generate qcm that matches a categry
-            Route::get('/', 'QCMController@generateQCM');
+            Route::get('/', 'TrainingController@getTraining');
             // post user result
-            Route::post('/submit', 'QCMContrller@submitResult');
+            //Route::post('/submit', 'TrainingController@submitResult');
 
         });
+    });
+
+    Route::group(['prefix' => 'exams'], function () {
+        // return list of courses'titles
+        Route::match(['get', 'post'], '/', 'ExamsController@getExams');
+        // upload specific course
+        Route::get('/{id}', 'ExamsController@getExams')->where('id', '[0-9]+');
     });
 });
 
 // user group
-Route::group(['preix' => 'user'], function () {
-
+Route::group(['prefix' => 'user'], function () {
 });

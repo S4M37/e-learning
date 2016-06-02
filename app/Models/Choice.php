@@ -9,9 +9,8 @@ class Choice extends Model
     protected $table = 'choices';
     protected $primaryKey = 'id_choice';
     protected $fillable = [
-        'label','valid','id_item'
+        'label', 'valid', 'id_item'
     ];
-    public $timestamps=false;
-
+    public $timestamps = false;
 
 }

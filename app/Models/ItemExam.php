@@ -9,7 +9,7 @@ class ItemExam extends Model
     protected $table = 'it_exams';
     protected $primaryKey = 'id_it_exam';
     protected $fillable = [
-        'response','id_item','id_exam','id_result'
+        'id_item', 'id_exam'
     ];
-    public $timestamps=false;
+    public $timestamps = false;
 }

@@ -9,6 +9,12 @@ class Exam extends Model
     protected $table = 'exams';
     protected $primaryKey = 'id_exam';
     protected $fillable = [
-        'label','test_date','id_user','id_category'
+        'label', 'duration'
     ];
+    public $timestamps = false;
+
+    public function items()
+    {
+        return $this->belongsToMany('App\Models\Item', 'item_exams', 'id_exam', 'id_item');
+    }
 }
