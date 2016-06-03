@@ -9,7 +9,7 @@ class Course extends Model
     protected $table = 'courses';
     protected $primaryKey = 'id_course';
     protected $fillable = [
-        'label', 'id_category'
+        'label', 'id_category', 'pdf_path', 'img_path'
     ];
     public $timestamps = false;
 

@@ -16,9 +16,9 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'mobile'], function () {
-    Route::post('/signin', 'Auth\AuthModileController@signin');
-    Route::post('/signup', 'Auth\AuthModileController@signup');
-    Route::post('/signout', 'Auth\AuthModilecontroller@signout');
+    Route::post('/signin', 'Auth\AuthMobileController@signin');
+    Route::post('/signup', 'Auth\AuthMobileController@signup');
+    Route::post('/signout', 'Auth\AuthMobileController@signout');
     route::get('/validate/{id_user}/{validation_code}', 'Auth\AuthModileController@validateEmail');
 
     Route::group(['prefix' => 'courses'], function () {
