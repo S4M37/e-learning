@@ -19,7 +19,7 @@ Route::group(['prefix' => 'mobile'], function () {
     Route::post('/signin', 'Auth\AuthMobileController@signin');
     Route::post('/signup', 'Auth\AuthMobileController@signup');
     Route::post('/signout', 'Auth\AuthMobileController@signout');
-    route::get('/validate/{id_user}/{validation_code}', 'Auth\AuthModileController@validateEmail');
+    route::get('/validate/{id_user}/{validation_code}', 'Auth\AuthMobileController@validateEmail');
 
     Route::group(['prefix' => 'courses'], function () {
         // return list of courses'titles
@@ -48,10 +48,22 @@ Route::group(['prefix' => 'mobile'], function () {
         // return list of courses'titles
         Route::match(['get', 'post'], '/', 'ExamsController@getExams');
         // upload specific course
-        Route::get('/{id}', 'ExamsController@getExams')->where('id', '[0-9]+');
+        Route::group(['prefix' => '/{id_Exam}'], function () {
+            Route::get('/', 'ExamsController@getExams');
+            Route::post('/submit', 'ExamsController@submit');
+            Route::group(['prefix' => '/results'], function () {
+                Route::get('/', 'ResultController@getResultsForExam');
+                Route::get('/{id_Result}', 'ResultController@getResultsForExam');
+            });
+        });
+
     });
 });
 
 // user group
 Route::group(['prefix' => 'user'], function () {
+    Route::group(['prefix' => '/{id_User}/results'], function () {
+        Route::get('/', 'ResultController@getResultsForUser');
+        Route::get('/{id_Result}', 'ResultController@getResultsForUser');
+    });
 });
