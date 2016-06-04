@@ -14,12 +14,17 @@ class CoursesController extends Controller
         $this->courcesServices = $courcesServices;
     }
 
-    function getCourses($id_Courses = null)
+    function getCourses($id_Course = null)
     {
-        if ($id_Courses == null) {
+        if ($id_Course == null) {
             return $this->courcesServices->getAllCourses();
         } else {
-            return $this->courcesServices->getCourseById($id_Courses);
+            return $this->courcesServices->getCourseById($id_Course);
         }
+    }
+
+    function downloadCourse($id_Course = null)
+    {
+        return $this->courcesServices->downloadCourseById($id_Course);
     }
 }

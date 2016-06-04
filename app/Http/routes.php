@@ -67,3 +67,10 @@ Route::group(['prefix' => 'user'], function () {
         Route::get('/{id_Result}', 'ResultController@getResultsForUser');
     });
 });
+
+// course group
+Route::group(['prefix' => 'courses'], function () {
+    Route::get('/', 'CoursesController@getCourses');
+    Route::get('/{id_Result}', 'CoursesController@getCourses');
+    Route::get('/{id_Result}/download', 'CoursesController@downloadCourse');
+});

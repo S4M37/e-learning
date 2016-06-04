@@ -22,4 +22,20 @@ class CoursesServices
 
         }
     }
+
+    public function downloadCourseById($id_Course)
+    {
+        $course = Course::find($id_Course);
+        if ($course == null) {
+            return response()->json(['response' => 'course not found'], 404);
+        } else {
+            $file = public_path() . $course->pdf_path;
+
+            $headers = array(
+                'Content-Type: application/pdf',
+            );
+
+            return response()->download($file, $course->label . ".pdf", $headers);
+        }
+    }
 }

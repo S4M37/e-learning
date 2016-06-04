@@ -32,7 +32,6 @@ class ExamsController extends Controller
 
     public function submit(Request $request, $id_Exam = null)
     {
-        $inputs = $request->input("inputs");
-        return $this->examsServices->store($id_Exam, $request->input("id_User"), $inputs);
+        return $this->examsServices->store($id_Exam, $request->input("id_User"), $request->input("inputs"));
     }
 }

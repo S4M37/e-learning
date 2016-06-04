@@ -50,7 +50,7 @@ class ExamsServices
             $item_result->id_result = $result->id_result;
             $item_result->save();
         }
-        return response()->json(['response' => Result::whereIdUser($id_User)->with(['items_result', 'exam'])->get()], 200);
+        return response()->json(['response' => Result::with(['items_result', 'exam'])->find($result->id_result)], 200);
     }
 
 }
