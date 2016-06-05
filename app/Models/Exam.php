@@ -17,4 +17,9 @@ class Exam extends Model
     {
         return $this->belongsToMany('App\Models\Item', 'item_exams', 'id_exam', 'id_item');
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Category', 'exam_category','id_exam','id_category');
+    }
 }

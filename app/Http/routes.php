@@ -43,28 +43,31 @@ Route::group(['prefix' => 'mobile'], function () {
 
         });
     });
-
-    Route::group(['prefix' => 'exams'], function () {
-        // return list of courses'titles
-        Route::match(['get', 'post'], '/', 'ExamsController@getExams');
-        // upload specific course
-        Route::group(['prefix' => '/{id_Exam}'], function () {
-            Route::get('/', 'ExamsController@getExams');
-            Route::post('/submit', 'ExamsController@submit');
-            Route::group(['prefix' => '/results'], function () {
-                Route::get('/', 'ResultController@getResultsForExam');
-                Route::get('/{id_Result}', 'ResultController@getResultsForExam');
+    Route::group(['middleware' => ['jwt.auth']], function () {
+        Route::group(['prefix' => 'exams'], function () {
+            // return list of courses'titles
+            Route::match(['get', 'post'], '/', 'ExamsController@getExams');
+            // upload specific course
+            Route::group(['prefix' => '/{id_Exam}'], function () {
+                Route::get('/', 'ExamsController@getExams');
+                Route::post('/submit', 'ExamsController@submit');
+                Route::group(['prefix' => '/results'], function () {
+                    Route::get('/', 'ResultController@getResultsForExam');
+                    Route::get('/{id_Result}', 'ResultController@getResultsForExam');
+                });
             });
-        });
 
+        });
     });
 });
 
 // user group
 Route::group(['prefix' => 'user'], function () {
-    Route::group(['prefix' => '/{id_User}/results'], function () {
-        Route::get('/', 'ResultController@getResultsForUser');
-        Route::get('/{id_Result}', 'ResultController@getResultsForUser');
+    Route::group(['middleware' => ['jwt.auth']], function () {
+        Route::group(['prefix' => '/{id_User}/results'], function () {
+            Route::get('/', 'ResultController@getResultsForUser');
+            Route::get('/{id_Result}', 'ResultController@getResultsForUser');
+        });
     });
 });
 

@@ -51,7 +51,12 @@ class AuthMobileController extends Controller
 
     function signup(Request $request)
     {
-        return $this->userServices->store($request);
+        $user = User::whereEmail($request->input('email'))->get()->first();
+        if ($user == null) {
+            return $this->userServices->store($request);
+        } else {
+            return  response()->json(['response'=>'user exist !'],405);
+        }
     }
 
     function validateEmail($id_user, $validation_code)

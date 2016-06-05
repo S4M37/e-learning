@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 </head>
 <body>
-<h2>Validation de Votre Inscrption dans Mekelti</h2>
+<h2>Validation de Votre Inscrption dans E-Learning</h2>
 <p>Vous étes :</p>
 <ul>
     <li><strong>Nom</strong> : {{ $name }}</li>
