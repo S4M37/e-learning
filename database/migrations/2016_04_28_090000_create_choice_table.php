@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateChoiceTable extends Migration
 {
@@ -32,10 +33,8 @@ class CreateChoiceTable extends Migration
      */
     public function down()
     {
-        Schema::table('choices', function(Blueprint $table) {
-
+        Schema::table('choices', function (Blueprint $table) {
             $table->dropForeign(['id_item']);
-
         });
         Schema::drop('choices');
     }

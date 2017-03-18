@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateCourseTable extends Migration
 {
@@ -13,7 +14,7 @@ class CreateCourseTable extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $t) {
-            $t->increments('id_curse');
+            $t->increments('id_course');
             $t->string('label');
             $t->integer('id_category')->unsigned();
             $t->foreign('id_category')
@@ -32,10 +33,10 @@ class CreateCourseTable extends Migration
      */
     public function down()
     {
-        Schema::table('curses', function(Blueprint $table) {
+        Schema::table('courses', function(Blueprint $table) {
 
             $table->dropForeign(['id_category']);
         });
-        Schema::drop('curses');
+        Schema::drop('courses');
     }
 }

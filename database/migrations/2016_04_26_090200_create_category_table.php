@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateCategoryTable extends Migration
 {
@@ -27,7 +28,9 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-
+        Schema::table('categories', function (Blueprint $table) {
+            //dropForeign
+        });
         Schema::drop('categories');
     }
 }

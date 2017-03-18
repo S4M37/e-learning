@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateItemExamsTable extends Migration
+class CreateItemResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,19 +13,13 @@ class CreateItemExamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_exams', function (Blueprint $table) {
-            $table->increments('id_it_exam');
+        Schema::create('item_results', function (Blueprint $table) {
+            $table->increments('id_item_exam');
             $table->string('response');
             $table->integer('id_result')->unsigned();
             $table->foreign('id_result')
                 ->references('id_result')
                 ->on('results')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
-            $table->integer('id_exam')->unsigned();
-            $table->foreign('id_exam')
-                ->references('id_exam')
-                ->on('exams')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
             $table->integer('id_item')->unsigned();
@@ -43,12 +38,10 @@ class CreateItemExamsTable extends Migration
      */
     public function down()
     {
-        Schema::table('item_exams', function(Blueprint $table) {
-
+        Schema::table('item_results', function (Blueprint $table) {
             $table->dropForeign(['id_item']);
             $table->dropForeign(['id_exam']);
-            $table->dropForeign(['id_result']);
         });
-        Schema::drop('item_exams');
+        Schema::drop('item_results');
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateExamsTable extends Migration
 {
@@ -14,21 +15,8 @@ class CreateExamsTable extends Migration
     {
         Schema::create('exams', function (Blueprint $t) {
             $t->increments('id_exam');
-            $t->date('test_date');
             $t->string('label');
-            $t->integer('id_category')->unsigned();
-            $t->foreign('id_category')
-                ->references('id_category')
-                ->on('categories')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
-            $t->integer('id_user')->unsigned();
-            /*$t->foreign('id_user')
-                ->references('id_user')
-                ->on('users')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');*/
-
+            $t->integer('duration');
         });
     }
 
@@ -39,11 +27,8 @@ class CreateExamsTable extends Migration
      */
     public function down()
     {
-        Schema::table('exams', function(Blueprint $table) {
-
-            $table->dropForeign(['id_category']);
-            $table->dropForeign(['id_user']);
-
+        Schema::table('exams', function (Blueprint $table) {
+            //dropForeign
         });
         Schema::drop('exams');
     }
