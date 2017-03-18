@@ -2,7 +2,7 @@
 namespace App\Metiers;
 
 use App\Models\Category;
-use App\Models\Item;
+use App\Models\Exam;
 
 class TrainingServices
 {
@@ -12,8 +12,7 @@ class TrainingServices
         if ($category == null) {
             return response()->json(['response' => 'category not found'], 404);
         } else {
-            return response()->json(['response' => Item::with('choices')
-                ->whereIdCategory($id_Category)->get()]);
+            return response()->json(['response' => Exam::with(['categories', 'items', 'items.choices'])->whereIsTraining(true)->get()]);
         }
     }
 }

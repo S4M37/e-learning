@@ -13,4 +13,9 @@ class Category extends Model
     ];
 
     public $timestamps = false;
+
+    function trainings()
+    {
+        return $this->belongsToMany('App\Models\Exam', 'exam_category', 'id_category', 'id_exam');
+    }
 }

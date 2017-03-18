@@ -35,7 +35,6 @@ class CreateCourseTable extends Migration
     public function down()
     {
         Schema::table('courses', function(Blueprint $table) {
-
             $table->dropForeign(['id_category']);
         });
         Schema::drop('courses');

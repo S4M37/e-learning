@@ -29,6 +29,9 @@ Route::group(['prefix' => 'mobile'], function () {
     });
 
     Route::group(['prefix' => 'categories'], function () {
+        // return list of categories with trainings
+        Route::get('trainings', 'CategoryController@getCategoriesWithTrainings');
+
         // return list of categories'names
         Route::get('/', 'CategoryController@getCategories');
         // return specfic category

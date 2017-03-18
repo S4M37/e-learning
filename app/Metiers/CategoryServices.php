@@ -20,4 +20,9 @@ class CategoryServices
     {
         return response()->json(['response' => Category::All()], 200);
     }
+
+    public function getAllCategoriesWithTrainings()
+    {
+        return response()->json(['response' => Category::with(['trainings'])->get()], 200);
+    }
 }

@@ -15,7 +15,7 @@ class Exam extends Model
 
     public function items()
     {
-        return $this->belongsToMany('App\Models\Item', 'item_exams', 'id_exam', 'id_item');
+        return $this->hasMany('App\Models\Item', 'id_exam', 'id_exam');
     }
 
     public function categories()

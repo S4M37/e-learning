@@ -22,4 +22,9 @@ class CategoryController extends Controller
             return $this->categoryServices->getAllCateogries();
         }
     }
+
+    function getCategoriesWithTrainings()
+    {
+        return $this->categoryServices->getAllCategoriesWithTrainings();
+    }
 }
