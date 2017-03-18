@@ -16,7 +16,7 @@ class CreateItemTable extends Migration
         Schema::create('items', function (Blueprint $t) {
             $t->increments('id_item');
             $t->string('label');
-            $t->integer('id_exam')->unique();
+            $t->integer('id_exam')->unsigned();
             $t->foreign('id_exam')
                 ->references('id_exam')
                 ->on('exams')
