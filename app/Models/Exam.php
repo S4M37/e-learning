@@ -9,7 +9,7 @@ class Exam extends Model
     protected $table = 'exams';
     protected $primaryKey = 'id_exam';
     protected $fillable = [
-        'label', 'duration'
+        'label', 'duration', 'is_training'
     ];
     public $timestamps = false;
 
@@ -20,6 +20,6 @@ class Exam extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('App\Models\Category', 'exam_category','id_exam','id_category');
+        return $this->belongsToMany('App\Models\Category', 'exam_category', 'id_exam', 'id_category');
     }
 }

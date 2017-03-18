@@ -16,6 +16,7 @@ class CreateCourseTable extends Migration
         Schema::create('courses', function (Blueprint $t) {
             $t->increments('id_course');
             $t->string('label');
+            $t->string('pdf_path');
             $t->integer('id_category')->unsigned();
             $t->foreign('id_category')
                 ->references('id_category')

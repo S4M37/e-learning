@@ -16,6 +16,12 @@ class CreateItemTable extends Migration
         Schema::create('items', function (Blueprint $t) {
             $t->increments('id_item');
             $t->string('label');
+            $t->integer('id_exam');
+            $t->foreign('id_exam')
+                ->references('id_exam')
+                ->on('exams')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
             $t->integer('id_category')->unsigned();
             $t->foreign('id_category')
                 ->references('id_category')
@@ -35,6 +41,7 @@ class CreateItemTable extends Migration
     {
         Schema::table('items', function (Blueprint $table) {
             $table->dropForeign(['id_category']);
+            $table->dropForeign(['id_exam']);
         });
         Schema::drop('items');
     }

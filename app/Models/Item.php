@@ -9,7 +9,7 @@ class Item extends Model
     protected $table = 'items';
     protected $primaryKey = 'id_item';
     protected $fillable = [
-        'label', 'id_category'
+        'label', 'id_category','id_exam'
     ];
     public $timestamps = false;
 

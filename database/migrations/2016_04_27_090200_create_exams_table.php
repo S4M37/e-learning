@@ -17,6 +17,7 @@ class CreateExamsTable extends Migration
             $t->increments('id_exam');
             $t->string('label');
             $t->integer('duration');
+            $t->boolean('is_training');
         });
     }
 

@@ -12,7 +12,8 @@ class TrainingServices
         if ($category == null) {
             return response()->json(['response' => 'category not found'], 404);
         } else {
-            return response()->json(['response' => Item::with('choices')->whereIdCategory($id_Category)->get()]);
+            return response()->json(['response' => Item::with('choices')
+                ->whereIdCategory($id_Category)->get()]);
         }
     }
 }
